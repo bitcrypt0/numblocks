@@ -1,0 +1,32 @@
+{
+  "app\\mint\\page.tsx -> @/components/mint/MintLive": {
+    "id": "app\\mint\\page.tsx -> @/components/mint/MintLive",
+    "files": [
+      "static/chunks/_app-pages-browser_components_mint_MintLive_tsx.js"
+    ]
+  },
+  "components\\wallet\\ConnectButton.tsx -> ./ConnectIsland": {
+    "id": "components\\wallet\\ConnectButton.tsx -> ./ConnectIsland",
+    "files": [
+      "static/chunks/_app-pages-browser_components_wallet_ConnectIsland_tsx.js"
+    ]
+  },
+  "node_modules\\.pnpm\\ox@0.14.29_typescript@5.9.3_zod@4.4.3\\node_modules\\ox\\_esm\\tempo\\internal\\virtualMasterPool.js -> ./mine.wasm.js": {
+    "id": "node_modules\\.pnpm\\ox@0.14.29_typescript@5.9.3_zod@4.4.3\\node_modules\\ox\\_esm\\tempo\\internal\\virtualMasterPool.js -> ./mine.wasm.js",
+    "files": []
+  },
+  "node_modules\\.pnpm\\viem@2.52.2_typescript@5.9.3_zod@4.4.3\\node_modules\\viem\\_esm\\actions\\public\\call.js -> ../../utils/ccip.js": {
+    "id": "node_modules\\.pnpm\\viem@2.52.2_typescript@5.9.3_zod@4.4.3\\node_modules\\viem\\_esm\\actions\\public\\call.js -> ../../utils/ccip.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_viem_2_52_2_typescript_5_9_3_zod_4_4_3_node_modules_viem-2d436f.js"
+    ]
+  },
+  "node_modules\\.pnpm\\viem@2.52.2_typescript@5.9.3_zod@4.4.3\\node_modules\\viem\\_esm\\utils\\rpc\\webSocket.js -> isows": {
+    "id": "node_modules\\.pnpm\\viem@2.52.2_typescript@5.9.3_zod@4.4.3\\node_modules\\viem\\_esm\\utils\\rpc\\webSocket.js -> isows",
+    "files": []
+  },
+  "node_modules\\.pnpm\\viem@2.52.2_typescript@5.9.3_zod@4.4.3\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1": {
+    "id": "node_modules\\.pnpm\\viem@2.52.2_typescript@5.9.3_zod@4.4.3\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1",
+    "files": []
+  }
+}

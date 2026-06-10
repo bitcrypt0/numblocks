@@ -1,0 +1,41 @@
+{
+  "name": "numberblocks-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "icons": "node scripts/generate-icons.mjs",
+    "generate:abis": "wagmi generate",
+    "sync:addresses": "node scripts/sync-addresses.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "5.1.1",
+    "@fontsource/spline-sans-mono": "5.1.1",
+    "@tanstack/react-query": "^5.101.0",
+    "dompurify": "^3.4.9",
+    "next": "14.2.25",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "viem": "^2.52.2",
+    "wagmi": "^3.6.16"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@wagmi/cli": "^2.10.0",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.25",
+    "png-to-ico": "2.1.8",
+    "postcss": "8.4.49",
+    "puppeteer-core": "^25.1.0",
+    "sharp": "0.33.5",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.9.3"
+  }
+}
