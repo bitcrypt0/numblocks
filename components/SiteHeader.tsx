@@ -29,6 +29,10 @@ export default function SiteHeader() {
   // independently owner-gated, so hiding the nav entry is purely cosmetic.
   const [isAdmin, setIsAdmin] = useState(false);
   const nav = isAdmin ? [...BASE_NAV, ADMIN_ITEM] : [...BASE_NAV];
+  // Mobile bottom bar: the four primary actions, plus a dedicated Admin tab
+  // for the owner — buried in the More sheet it read as desktop-only.
+  const tabs = isAdmin ? [...BASE_NAV.slice(0, 4), ADMIN_ITEM] : [...BASE_NAV.slice(0, 4)];
+  const sheetItems = BASE_NAV.slice(4);
 
   useEffect(() => {
     setSheetOpen(false);
@@ -70,18 +74,18 @@ export default function SiteHeader() {
         aria-label="Primary mobile"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-raised pb-[env(safe-area-inset-bottom)] md:hidden"
       >
-        <ul className="grid grid-cols-5">
-          {nav.slice(0, 4).map((item) => (
+        <ul className={`grid ${isAdmin ? "grid-cols-6" : "grid-cols-5"}`}>
+          {tabs.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
-                className={`flex min-h-[56px] flex-col items-center justify-center gap-0.5 font-display text-xs font-bold ${
+                className={`flex min-h-[56px] flex-col items-center justify-center gap-0.5 px-0.5 font-display text-xs font-bold ${
                   isActive(pathname, item.href) ? "text-brand" : "text-ink-soft"
                 }`}
               >
                 <TabIcon name={item.label} active={isActive(pathname, item.href)} />
-                {item.label}
+                <span className="max-w-full truncate">{item.label}</span>
               </Link>
             </li>
           ))}
@@ -92,7 +96,9 @@ export default function SiteHeader() {
               aria-expanded={sheetOpen}
               aria-controls="mobile-more-sheet"
               className={`flex min-h-[56px] w-full flex-col items-center justify-center gap-0.5 font-display text-xs font-bold ${
-                sheetOpen || isActive(pathname, "/about") || isActive(pathname, "/admin")
+                sheetOpen ||
+                isActive(pathname, "/about") ||
+                (!isAdmin && isActive(pathname, "/admin"))
                   ? "text-brand"
                   : "text-ink-soft"
               }`}
@@ -105,7 +111,7 @@ export default function SiteHeader() {
         {sheetOpen ? (
           <div id="mobile-more-sheet" className="border-t border-line bg-raised p-3">
             <ul className="grid grid-cols-2 gap-2">
-              {nav.slice(4).map((item) => (
+              {sheetItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -159,6 +165,20 @@ function TabIcon({ name, active }: { name: string; active: boolean }) {
         <svg {...common}>
           <rect x="3" y="6" width="18" height="13" rx="3" stroke={stroke} strokeWidth="2" />
           <path d="M15 12.5h3" stroke={stroke} strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      );
+    case "Admin":
+      return (
+        <svg {...common}>
+          <path
+            d="M12 3.5l6.5 2.6v4.7c0 4.1-2.7 6.9-6.5 8.7-3.8-1.8-6.5-4.6-6.5-8.7V6.1L12 3.5z"
+            stroke={stroke}
+            strokeWidth="2"
+            strokeLinejoin="round"
+            fill={active ? "currentColor" : "none"}
+            opacity={active ? 0.18 : 1}
+          />
+          <path d="M9.5 12l1.8 1.8 3.2-3.6" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
     default:

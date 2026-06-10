@@ -121,9 +121,10 @@ export default function HomePage() {
             <span className="chip-digit h-10 w-10 bg-brand text-lg text-brand-ink" aria-hidden="true">1</span>
             <h3 className="mt-4 font-display text-xl font-bold text-ink">Backed, always</h3>
             <p className="mt-2 text-ink-soft">
-              Every NumberBlock needs 1,000 uniBlocks behind it. Spend the backing and the
-              protocol{"’"}s cleanup burns the highest unsealed block in the wallet. Sealed
-              blocks are protected — actions that would under-back them revert.
+              Every NumberBlock needs 1,000 uniBlocks behind it, minted fresh the moment the
+              block is. Spend the backing and the protocol{"’"}s cleanup burns the highest
+              unsealed block in the wallet. Sealed blocks are protected — actions that would
+              under-back them revert.
             </p>
           </article>
           <article className="card p-6">
@@ -139,7 +140,8 @@ export default function HomePage() {
             <span className="chip-digit h-10 w-10 bg-ink text-lg text-bg" aria-hidden="true">3</span>
             <h3 className="mt-4 font-display text-xl font-bold text-ink">Mint Paths</h3>
             <p className="mt-2 text-ink-soft">
-              Genesis blocks #1–5,000 mint from official pool buys. Sale blocks #5,001–10,000 mint
+              Genesis blocks #1–5,000 mint from official pool buys — one per 1,000 UB of swap
+              output, each pair-minting its own fresh backing. Sale blocks #5,001–10,000 mint
               through the five-phase BlocksSale. When a block burns via backing cleanup, a Reborn
               id (#10,001+) can mint later from the pool — new seed, new look.
             </p>

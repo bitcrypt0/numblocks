@@ -22,8 +22,14 @@ export interface BuyQuote {
   teamFeeEth: bigint;
   grossUBOut: bigint;
   burnUB: bigint;
+  /** UB delivered by the swap itself, net of the burn. Drives the NB count. */
   netUB: bigint;
+  /** floor(netUB / 1,000) - set by the swap output, not the buyer's balance. */
   nbMinted: number;
+  /** Freshly-issued backing: Core pair-mints 1,000 UB per NB on top of netUB. */
+  backingUB: bigint;
+  /** netUB + backingUB - what the buyer's UB balance actually goes up by. */
+  totalUB: bigint;
   minUBOut: bigint;
   exceedsRelease: boolean;
   exceedsMintCap: boolean;
@@ -106,13 +112,19 @@ export function useSwap() {
     const burnUB = (grossUBOut * state.feeBurnBps) / state.bpsDenom;
     const netUB = grossUBOut - burnUB;
     const nbUncapped = Number(netUB / BACKING_UNIT);
+    const nbMinted = Math.min(nbUncapped, state.maxNBMintsPerSwap);
+    // Core._mintInternal pair-mints BACKING_UNIT fresh UB per NB, on top of
+    // the swapped UB - a pool buyer receives netUB + backingUB in total.
+    const backingUB = BigInt(nbMinted) * BACKING_UNIT;
     return {
       ethIn,
       teamFeeEth,
       grossUBOut,
       burnUB,
       netUB,
-      nbMinted: Math.min(nbUncapped, state.maxNBMintsPerSwap),
+      nbMinted,
+      backingUB,
+      totalUB: netUB + backingUB,
       minUBOut: (netUB * (state.bpsDenom - SLIPPAGE_BPS)) / state.bpsDenom,
       exceedsRelease: netUB > state.availableUB,
       exceedsMintCap: nbUncapped > state.maxNBMintsPerSwap,

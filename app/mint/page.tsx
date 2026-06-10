@@ -21,8 +21,8 @@ export default function MintPage() {
         </h1>
         <p className="mt-3 text-lg text-ink-soft">
           The BlocksSale opens ids #5,001–10,000 across five paid phases of 1,000 blocks each.
-          Every mint pair-mints 1,000 UB to your wallet, so the new block is exactly backed the
-          moment it exists.
+          Every mint pair-mints 1,000 freshly issued UB to your wallet, so the new block is
+          exactly backed the moment it exists.
         </p>
       </header>
       <MintLive />

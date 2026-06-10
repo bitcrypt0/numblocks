@@ -32,7 +32,9 @@ export default function AboutPage() {
               Two assets share one system. NumberBlocks (NB) is the ERC721 — the visual identity
               and collectible card. uniBlocks (UB) is the ERC20 that backs it.{" "}
               <strong className="text-ink">1 NB needs at least 1,000 UB as backing.</strong> A
-              wallet holding 3 NBs needs 3,000 UB; anything above that is loose UB.
+              wallet holding 3 NBs needs 3,000 UB; anything above that is loose UB. The backing
+              is minted fresh at the moment each NB mints, so a block can never be born
+              under-backed.
             </p>
             <p className="mt-3 text-ink-soft">
               Holding 1,000 UB does not create an NB by itself. New blocks mint only through two
@@ -117,19 +119,63 @@ export default function AboutPage() {
               UB trades against ETH in one official Uniswap v4 pool with the NumberBlocks hook
               installed. The combined protocol fee is{" "}
               <strong className="text-ink">1.0%</strong>: a 0.20% ETH team fee on buys, and a
-              0.80% UB burn on every swap — buys and sells alike. The burn is deflationary; the
-              team takes nothing on sells.
+              0.80% UB burn on every swap — buys and sells alike. The team takes nothing on
+              sells. The burn removes UB, but per-mint issuance adds far more than the burn
+              removes, so it does not make UB net-deflationary.
             </p>
             <p className="mt-3 text-ink-soft">
-              Buys also mint: every full 1,000 UB of net output pair-mints a new NumberBlock to
-              the buyer. A timed release schedule (20,000 UB at launch plus 10,000 UB per minute)
-              paces how fast the pool can mint, so no single buyer drains the genesis band on day
-              one.
+              Buys also mint — and they pay out twice. Every full 1,000 UB the{" "}
+              <strong className="text-ink">swap delivers</strong> mints one NumberBlock to the
+              buyer, and for each block the protocol pair-mints{" "}
+              <strong className="text-ink">another 1,000 freshly issued UB</strong> as that
+              block{"’"}s backing. A pool buyer therefore receives the UB they swapped for{" "}
+              <em>plus</em> newly minted backing UB — roughly double the swapped amount. The
+              number of blocks is floor(swapped UB / 1,000), driven by the swap output, never by
+              the buyer{"’"}s total UB balance.
+            </p>
+            <p className="mt-3 text-ink-soft">
+              Worked example: a buy whose swap delivers ~38,405 UB mints 38 NumberBlocks and
+              pair-mints 38,000 backing UB — the buyer ends up with ~76,405 UB in total, of
+              which 38,000 backs the 38 blocks and ~38,405 is loose.
+            </p>
+            <p className="mt-3 text-ink-soft">
+              A timed release schedule (20,000 UB at launch plus 10,000 UB per minute) paces how
+              fast the pool can mint, so no single buyer drains the genesis band on day one.
             </p>
             <p className="mt-3 text-ink-soft">
               The pool{"’"}s first liquidity comes from a one-shot, owner-only seed mint of loose UB,
               paired with ETH and locked away in the LP locker — a lock the owner can extend but
               never shorten, with no emergency unlock.
+            </p>
+          </section>
+
+          <section aria-labelledby="about-supply">
+            <h2 id="about-supply" className="font-display text-2xl font-bold text-ink">
+              UB supply: bound to the blocks
+            </h2>
+            <p className="mt-3 text-ink-soft">
+              The collection is hard-capped at{" "}
+              <strong className="text-ink">10,000 NumberBlocks</strong> — a mint past that
+              reverts on-chain — and every block needs exactly 1,000 UB, so the UB backing the
+              blocks can never exceed{" "}
+              <strong className="text-ink">10,000,000, by construction</strong>. Backing is
+              minted on demand, 1,000 per block at the moment it mints, so a block can never be
+              born under-backed. Add the one-time 5,000,000 UB seed — paired with ETH and locked
+              away in the LP locker — and total supply settles near ~15,000,000 once everything
+              mints out.
+            </p>
+            <p className="mt-3 text-ink-soft">
+              Issuance cannot be rushed. The timed release schedule (20,000 UB at launch plus
+              10,000 UB per minute) caps how fast the pool can mint, and a per-swap mint limit
+              caps any single buy — no one can drain the genesis band on day one.
+            </p>
+            <p className="mt-3 text-ink-soft">
+              Best of all, issuance is tethered to the blocks themselves. Once all 10,000 are
+              live, the pool refuses any buy large enough to mint — it reverts until a block
+              burns via backing cleanup, freeing exactly one slot for a single Reborn mint. Past
+              mint-out, UB supply moves with the collection{"’"}s own churn: one block at a
+              time, only after a burn makes room, never in bulk. And the 0.80% UB burn fires on
+              every swap, buys and sells alike, chipping supply back down as volume flows.
             </p>
           </section>
 

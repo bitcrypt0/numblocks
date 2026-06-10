@@ -153,14 +153,29 @@ function SwapInner() {
               <dd className="font-bold text-danger">-{formatUB(buy.burnUB)}</dd>
             </div>
             <div className="flex justify-between gap-4 border-t border-line pt-2">
-              <dt className="font-bold text-ink">Net UB to you (est.)</dt>
+              <dt className="font-bold text-ink">UB from swap (est.)</dt>
               <dd className="font-bold text-positive">{formatUB(buy.netUB)}</dd>
             </div>
             <div className="flex justify-between gap-4">
-              <dt className="font-bold text-ink">New NumberBlocks</dt>
+              <dt className="font-bold text-ink">NBs minted (1 per full 1,000 UB swapped)</dt>
               <dd className="font-bold text-brand">{buy.nbMinted}</dd>
             </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-ink-soft">Backing UB minted to you (1,000 per NB)</dt>
+              <dd className="font-bold text-ink">+{formatUB(buy.backingUB)}</dd>
+            </div>
+            <div className="flex justify-between gap-4 border-t border-line pt-2">
+              <dt className="font-bold text-ink">Total UB you receive (est.)</dt>
+              <dd className="font-bold text-positive">{formatUB(buy.totalUB)}</dd>
+            </div>
           </dl>
+        ) : null}
+        {buy && buy.nbMinted > 0 ? (
+          <p className="mt-3 rounded-block bg-sunken p-4 text-sm text-ink-soft">
+            A pool buy pays out twice: the UB the swap delivers, plus 1,000 freshly minted UB
+            per new NumberBlock as its backing. Your UB balance rises by the total above — about
+            double the swapped amount — but only the swapped UB drives how many blocks mint.
+          </p>
         ) : null}
         {sell ? (
           <dl className="mt-6 space-y-2 rounded-block bg-sunken p-4 font-mono text-sm tabular">

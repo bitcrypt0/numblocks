@@ -38,7 +38,7 @@ export default function StatusPanel({
           </dd>
         </div>
         <div className="rounded-block bg-sunken p-3">
-          <dt className="text-xs font-semibold uppercase tracking-wide text-ink-faint">UB total supply</dt>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Circulating UB</dt>
           <dd className="mt-1 font-mono text-lg font-bold tabular text-ink">{formatUB(status.ubTotalSupply)}</dd>
         </div>
         <div className="rounded-block bg-sunken p-3">

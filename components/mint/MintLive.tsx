@@ -155,7 +155,7 @@ function MintInner() {
               <p className="mt-4 text-sm text-ink-soft">
                 Mints are EOA-only - contract callers and EIP-7702 delegated accounts are rejected.
                 Overpayment refunds in the same transaction. Each block arrives with its 1,000 UB
-                backing.
+                backing, minted fresh at purchase.
               </p>
             </>
           )}

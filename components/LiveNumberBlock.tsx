@@ -11,6 +11,11 @@ import { useEffect, useMemo, useState } from "react";
  */
 
 const SMIL_TAGS = ["animate", "animateTransform", "animateMotion", "set", "mpath"];
+// DOMPurify's SVG allowlist covers text-anchor/alignment-baseline but NOT
+// dominant-baseline, which Renderer.sol uses to vertically center every
+// <text> (block digits, the Prime "P", the Powers-of-Two "10", captions).
+// Without it the glyphs sit on the baseline and drift visibly off-center.
+const TEXT_ATTRS = ["dominant-baseline"];
 const SMIL_ATTRS = [
   "attributeName",
   "begin",
@@ -34,7 +39,7 @@ export function sanitizeOnchainSVG(svg: string, { animate = true }: { animate?: 
   const clean = DOMPurify.sanitize(svg, {
     USE_PROFILES: { svg: true, svgFilters: true },
     ADD_TAGS: SMIL_TAGS,
-    ADD_ATTR: SMIL_ATTRS,
+    ADD_ATTR: [...SMIL_ATTRS, ...TEXT_ATTRS],
     FORBID_TAGS: ["script", "foreignObject", "style"],
     NAMESPACE: "http://www.w3.org/2000/svg",
   });
